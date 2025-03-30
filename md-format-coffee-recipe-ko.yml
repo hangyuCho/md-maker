@@ -1,0 +1,99 @@
+name: Coffee Recipe
+description: Create a new coffee recipe
+language: ko
+fields:
+  - name: title
+    type: input
+    message: 레시피 제목을 입력하세요
+    default: 나만의 커피 레시피
+  - name: description
+    type: input
+    message: 레시피 설명을 입력하세요
+    default: 맛있는 커피 레시피입니다
+  - name: difficulty
+    type: list
+    message: 난이도를 선택하세요
+    choices:
+      - 쉬움
+      - 보통
+      - 어려움
+  - name: dripper
+    type: list
+    message: 드리퍼를 선택하세요
+    choices:
+      - Hario V60
+      - Kalita Wave
+      - Chemex
+      - Other
+  - name: customDripper
+    type: input
+    message: 다른 드리퍼 이름을 입력하세요
+    when: (answers) => answers.dripper === 'Other'
+  - name: coffeeWeight
+    type: input
+    message: 커피 무게를 입력하세요 (g)
+    default: 20
+  - name: waterAmount
+    type: input
+    message: 물의 양을 입력하세요 (g)
+    default: 480
+  - name: waterTemp
+    type: input
+    message: 물의 온도를 입력하세요 (°C)
+    default: 100
+  - name: grinder
+    type: list
+    message: 그라인더를 선택하세요
+    choices:
+      - 코만단테
+      - 바라차 엔코어
+      - 펠로우 스태그
+      - Other
+  - name: customGrinder
+    type: input
+    message: 다른 그라인더 이름을 입력하세요
+    when: (answers) => answers.grinder === 'Other'
+  - name: steps
+    type: input
+    message: 추출 단계 수를 입력하세요
+    default: 3
+  - name: stepDetails
+    type: input
+    message: >-
+      각 단계의 상세 정보를 입력하세요
+      (쉼표로 구분, 각 단계는 |로 구분: 시간|물|총량|설명)
+    when: (answers) => true
+stepFormat: |
+  ### {{index}}단계
+  - 시간: {{time}}
+  - 물: {{water}}
+  - 총량: {{total}}
+  - 설명: {{description}}
+template: |
+  ---
+  id: {{id}}
+  name: {{title}}
+  description: {{description}}
+  difficulty: {{difficulty}}
+  createdAt: {{createdAt}}
+  updatedAt: {{updatedAt}}
+  createdBy: {{createdBy}}
+  isPublished: false
+  ---
+
+  # {{title}}
+
+  {{description}}
+
+  ## 설정
+
+  - 드리퍼: {{dripper}}
+  - 커피 무게: {{coffeeWeight}}g
+  - 물의 량: {{waterAmount}}g
+  - 물의 온도: {{waterTemp}}°C
+  - 그라인더: {{grinder}}
+
+  ## 추출 단계
+
+  {{#stepDetails}}
+  {{/stepDetails}} 

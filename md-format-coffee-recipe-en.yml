@@ -1,0 +1,99 @@
+name: Coffee Recipe
+description: Create a new coffee recipe
+language: en
+fields:
+  - name: title
+    type: input
+    message: Enter recipe title
+    default: My Coffee Recipe
+  - name: description
+    type: input
+    message: Enter recipe description
+    default: A delicious coffee recipe
+  - name: difficulty
+    type: list
+    message: Select difficulty level
+    choices:
+      - Easy
+      - Medium
+      - Hard
+  - name: dripper
+    type: list
+    message: Select dripper
+    choices:
+      - Hario V60
+      - Kalita Wave
+      - Chemex
+      - Other
+  - name: customDripper
+    type: input
+    message: Enter other dripper name
+    when: (answers) => answers.dripper === 'Other'
+  - name: coffeeWeight
+    type: input
+    message: Enter coffee weight (g)
+    default: 20
+  - name: waterAmount
+    type: input
+    message: Enter water amount (g)
+    default: 480
+  - name: waterTemp
+    type: input
+    message: Enter water temperature (°C)
+    default: 100
+  - name: grinder
+    type: list
+    message: Select grinder
+    choices:
+      - Comandante
+      - Baratza Encore
+      - Fellow Stagg
+      - Other
+  - name: customGrinder
+    type: input
+    message: Enter other grinder name
+    when: (answers) => answers.grinder === 'Other'
+  - name: steps
+    type: input
+    message: Enter number of extraction steps
+    default: 3
+  - name: stepDetails
+    type: input
+    message: >-
+      Enter details for each step
+      (comma-separated, each step separated by |: time|water|total|description)
+    when: (answers) => true
+stepFormat: |
+  ### Step {{index}}
+  - Time: {{time}}
+  - Water: {{water}}
+  - Total: {{total}}
+  - Description: {{description}}
+template: |
+  ---
+  id: {{id}}
+  name: {{title}}
+  description: {{description}}
+  difficulty: {{difficulty}}
+  createdAt: {{createdAt}}
+  updatedAt: {{updatedAt}}
+  createdBy: {{createdBy}}
+  isPublished: false
+  ---
+
+  # {{title}}
+
+  {{description}}
+
+  ## Settings
+
+  - Dripper: {{dripper}}
+  - Coffee Weight: {{coffeeWeight}}g
+  - Water Amount: {{waterAmount}}g
+  - Water Temperature: {{waterTemp}}°C
+  - Grinder: {{grinder}}
+
+  ## Extraction Steps
+
+  {{#stepDetails}}
+  {{/stepDetails}} 

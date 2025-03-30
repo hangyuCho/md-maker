@@ -1,0 +1,99 @@
+name: Coffee Recipe
+description: Create a new coffee recipe
+language: ja
+fields:
+  - name: title
+    type: input
+    message: レシピのタイトルを入力してください
+    default: 私のコーヒーレシピ
+  - name: description
+    type: input
+    message: レシピの説明を入力してください
+    default: おいしいコーヒーレシピです
+  - name: difficulty
+    type: list
+    message: 難易度を選択してください
+    choices:
+      - 簡単
+      - 普通
+      - 難しい
+  - name: dripper
+    type: list
+    message: ドリッパーを選択してください
+    choices:
+      - Hario V60
+      - Kalita Wave
+      - Chemex
+      - その他
+  - name: customDripper
+    type: input
+    message: その他のドリッパー名を入力してください
+    when: (answers) => answers.dripper === 'その他'
+  - name: coffeeWeight
+    type: input
+    message: コーヒーの量を入力してください (g)
+    default: 20
+  - name: waterAmount
+    type: input
+    message: お湯の量を入力してください (g)
+    default: 480
+  - name: waterTemp
+    type: input
+    message: お湯の温度を入力してください (°C)
+    default: 100
+  - name: grinder
+    type: list
+    message: グラインダーを選択してください
+    choices:
+      - コマンダンテ
+      - バラッツァ エンコア
+      - フェロー スタッグ
+      - その他
+  - name: customGrinder
+    type: input
+    message: その他のグラインダー名を入力してください
+    when: (answers) => answers.grinder === 'その他'
+  - name: steps
+    type: input
+    message: 抽出ステップの数を入力してください
+    default: 3
+  - name: stepDetails
+    type: input
+    message: >-
+      各ステップの詳細を入力してください
+      (カンマ区切り、各ステップは | で区切る: 時間|水|総量|説明)
+    when: (answers) => true
+stepFormat: |
+  ### ステップ {{index}}
+  - 時間: {{time}}
+  - 水: {{water}}
+  - 総量: {{total}}
+  - 説明: {{description}}
+template: |
+  ---
+  id: {{id}}
+  name: {{title}}
+  description: {{description}}
+  difficulty: {{difficulty}}
+  createdAt: {{createdAt}}
+  updatedAt: {{updatedAt}}
+  createdBy: {{createdBy}}
+  isPublished: false
+  ---
+
+  # {{title}}
+
+  {{description}}
+
+  ## 設定
+
+  - ドリッパー: {{dripper}}
+  - コーヒーの量: {{coffeeWeight}}g
+  - お湯の量: {{waterAmount}}g
+  - お湯の温度: {{waterTemp}}°C
+  - グラインダー: {{grinder}}
+
+  ## 抽出ステップ
+
+  {{#stepDetails}}
+  {{/stepDetails}} 
