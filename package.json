@@ -1,7 +1,7 @@
 {
   "name": "h9-cli-md-maker",
   "version": "1.0.0",
-  "description": "CLI tool for creating markdown files from YAML templates with multilingual support",
+  "description": "CLI tool for creating markdown files from YAML templates",
   "main": "dist/index.js",
   "bin": {
     "md-maker": "./dist/index.js"
@@ -9,28 +9,19 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "ts-node src/index.ts",
-    "prepublishOnly": "npm run build"
+    "dev": "ts-node src/index.ts"
   },
-  "keywords": [
-    "cli",
-    "markdown",
-    "template",
-    "yaml",
-    "i18n",
-    "coffee",
-    "recipe"
-  ],
-  "author": "chg33",
-  "license": "ISC",
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/chg33/h9-cli-md-maker.git"
+    "url": "git+https://github.com/hangyuCho/md-maker.git"
   },
   "bugs": {
-    "url": "https://github.com/chg33/h9-cli-md-maker/issues"
+    "url": "https://github.com/hangyuCho/md-maker/issues"
   },
-  "homepage": "https://github.com/chg33/h9-cli-md-maker#readme",
+  "homepage": "https://github.com/hangyuCho/md-maker#readme",
   "dependencies": {
     "chalk": "^4.1.2",
     "commander": "^11.1.0",
